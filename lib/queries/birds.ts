@@ -94,3 +94,15 @@ export async function getOffspringOf(birdId: string) {
   if (error) throw error;
   return data;
 }
+
+export async function getOffspringOfBrood(broodId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("birds")
+    .select("id, name, ring_number, ring_year, ring_color, sex, species_id")
+    .eq("brood_id", broodId)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return data;
+}
