@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBirdById, getOffspringOf } from "@/lib/queries/birds";
 import { listCompetitionResults } from "@/lib/queries/competitions";
+import { getSignedPhotoUrl } from "@/lib/storage/photos";
 import { formatBirdLabel, formatSex, formatStatus } from "@/lib/domain/birdLabel";
 import { Button } from "@/components/ui/Button";
 
@@ -20,22 +22,35 @@ export default async function VogelDetailPage({
   }
   if (!bird) notFound();
 
-  const [offspring, competitionResults] = await Promise.all([
+  const [offspring, competitionResults, photoUrl] = await Promise.all([
     getOffspringOf(id),
     listCompetitionResults({ birdId: id }),
+    getSignedPhotoUrl("bird-photos", bird.photo_url),
   ]);
 
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-zinc-900">
-            {formatBirdLabel(bird)}
-          </h1>
-          <p className="text-sm text-zinc-600">
-            {bird.species?.name_nl} &middot; {formatSex(bird.sex)} &middot;{" "}
-            {formatStatus(bird.status)}
-          </p>
+        <div className="flex items-center gap-4">
+          {photoUrl && (
+            <Image
+              src={photoUrl}
+              alt={formatBirdLabel(bird)}
+              width={64}
+              height={64}
+              unoptimized
+              className="h-16 w-16 rounded-full object-cover"
+            />
+          )}
+          <div>
+            <h1 className="text-2xl font-semibold text-zinc-900">
+              {formatBirdLabel(bird)}
+            </h1>
+            <p className="text-sm text-zinc-600">
+              {bird.species?.name_nl} &middot; {formatSex(bird.sex)} &middot;{" "}
+              {formatStatus(bird.status)}
+            </p>
+          </div>
         </div>
         <div className="flex gap-2">
           <Link href={`/vogels/${id}/stamboom`}>

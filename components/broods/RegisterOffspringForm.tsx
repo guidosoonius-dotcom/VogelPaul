@@ -58,6 +58,8 @@ export default function RegisterOffspringForm({
             id="offspring_ring_year"
             name="ring_year"
             type="number"
+            min={1990}
+            max={new Date().getFullYear() + 1}
             value={ringYear}
             onChange={(e) => setRingYear(e.target.value)}
           />

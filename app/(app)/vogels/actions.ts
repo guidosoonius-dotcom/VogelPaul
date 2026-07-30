@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { uploadOwnerPhoto } from "@/lib/storage/photos";
 import type { BirdSex, BirdStatus } from "@/lib/types/database.types";
 
 function optionalText(value: FormDataEntryValue | null): string | null {
@@ -42,11 +43,17 @@ export async function createBird(formData: FormData) {
   const { data, error } = await supabase
     .from("birds")
     .insert(payload)
-    .select("id")
+    .select("id, owner_id")
     .single();
 
   if (error) {
     throw new Error(`Vogel opslaan is mislukt: ${error.message}`);
+  }
+
+  const photo = formData.get("photo");
+  if (photo instanceof File && photo.size > 0) {
+    const path = await uploadOwnerPhoto("bird-photos", data.owner_id, data.id, photo);
+    await supabase.from("birds").update({ photo_url: path }).eq("id", data.id);
   }
 
   revalidatePath("/vogels");
@@ -57,6 +64,13 @@ export async function updateBird(birdId: string, formData: FormData) {
   const supabase = await createClient();
   const payload = birdPayloadFromFormData(formData);
 
+  const { data: existing, error: fetchError } = await supabase
+    .from("birds")
+    .select("owner_id")
+    .eq("id", birdId)
+    .single();
+  if (fetchError) throw new Error(fetchError.message);
+
   const { error } = await supabase
     .from("birds")
     .update(payload)
@@ -64,6 +78,12 @@ export async function updateBird(birdId: string, formData: FormData) {
 
   if (error) {
     throw new Error(`Vogel bijwerken is mislukt: ${error.message}`);
+  }
+
+  const photo = formData.get("photo");
+  if (photo instanceof File && photo.size > 0) {
+    const path = await uploadOwnerPhoto("bird-photos", existing.owner_id, birdId, photo);
+    await supabase.from("birds").update({ photo_url: path }).eq("id", birdId);
   }
 
   revalidatePath("/vogels");

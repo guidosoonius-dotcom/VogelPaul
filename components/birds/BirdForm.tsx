@@ -101,7 +101,7 @@ export default function BirdForm({
   const motherCandidates = otherBirds.filter((b) => b.sex !== "male");
 
   return (
-    <form action={action} className="space-y-6">
+    <form action={action} className="space-y-6" encType="multipart/form-data">
       <div className="grid gap-4 sm:grid-cols-2">
         <FieldWrapper label="Soort" htmlFor="species_id">
           <Select
@@ -168,6 +168,8 @@ export default function BirdForm({
               id="ring_year"
               name="ring_year"
               type="number"
+              min={1990}
+              max={new Date().getFullYear() + 1}
               value={ringYear}
               onChange={(e) => setRingYear(e.target.value)}
             />
@@ -245,6 +247,10 @@ export default function BirdForm({
           </FieldWrapper>
         </div>
       </fieldset>
+
+      <FieldWrapper label="Foto (optioneel)" htmlFor="photo">
+        <Input id="photo" name="photo" type="file" accept="image/*" />
+      </FieldWrapper>
 
       <FieldWrapper label="Notities" htmlFor="notes">
         <Textarea id="notes" name="notes" rows={3} defaultValue={data.notes ?? ""} />
