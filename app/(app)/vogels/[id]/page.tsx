@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBirdById, getOffspringOf } from "@/lib/queries/birds";
+import { listCompetitionResults } from "@/lib/queries/competitions";
 import { formatBirdLabel, formatSex, formatStatus } from "@/lib/domain/birdLabel";
 import { Button } from "@/components/ui/Button";
 
@@ -19,7 +20,10 @@ export default async function VogelDetailPage({
   }
   if (!bird) notFound();
 
-  const offspring = await getOffspringOf(id);
+  const [offspring, competitionResults] = await Promise.all([
+    getOffspringOf(id),
+    listCompetitionResults({ birdId: id }),
+  ]);
 
   return (
     <div>
@@ -129,6 +133,39 @@ export default async function VogelDetailPage({
                   {formatBirdLabel(child)}
                 </Link>
                 <span className="text-zinc-500">{formatSex(child.sex)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-medium text-zinc-800">
+            Wedstrijdresultaten ({competitionResults.length})
+          </h2>
+          <Link
+            href={`/wedstrijden/nieuw?bird=${id}`}
+            className="text-sm text-emerald-800 hover:underline"
+          >
+            Resultaat toevoegen
+          </Link>
+        </div>
+        {competitionResults.length === 0 ? (
+          <p className="mt-2 text-sm text-zinc-600">
+            Nog geen wedstrijdresultaten geregistreerd.
+          </p>
+        ) : (
+          <ul className="mt-2 divide-y divide-zinc-100 text-sm">
+            {competitionResults.map((result) => (
+              <li key={result.id} className="flex justify-between py-2">
+                <Link
+                  href={`/wedstrijden/${result.id}`}
+                  className="text-emerald-800 hover:underline"
+                >
+                  {result.show_name} ({result.show_date})
+                </Link>
+                <span className="text-zinc-500">{result.ranking ?? result.points ?? "-"}</span>
               </li>
             ))}
           </ul>
