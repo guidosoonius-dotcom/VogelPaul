@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getDashboardStats } from "@/lib/queries/dashboard";
 import { getPrizeShowcase } from "@/lib/queries/competitions";
@@ -36,10 +37,25 @@ export default async function DashboardPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-ink">Dashboard</h1>
-      <p className="mt-1 text-sm text-ink-soft">
-        Seizoen {currentYear} &middot; overzicht van je volière
-      </p>
+      <section className="relative h-48 overflow-hidden rounded-3xl sm:h-56">
+        <Image
+          src="/hero-bird.jpg"
+          alt="Gele zangvogel op een bloesemtak"
+          fill
+          priority
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-ink/0" />
+        <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
+          <h1 className="font-display text-3xl font-black leading-[1.05] text-card-raised sm:text-4xl">
+            Welkom terug.
+          </h1>
+          <p className="mt-2 text-sm text-card-raised/85 sm:text-base">
+            Seizoen {currentYear} &middot; overzicht van je volière
+          </p>
+        </div>
+      </section>
 
       <section className="mt-6">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Overzicht</h2>
