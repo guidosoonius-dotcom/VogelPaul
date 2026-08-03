@@ -32,7 +32,7 @@ export default function NavBar({ email }: { email: string }) {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 font-display text-lg font-bold"
+            className="flex items-center gap-2 rounded-md font-display text-lg font-bold focus-visible:outline-card-raised"
           >
             <FeatherMark />
             VogelPaul
@@ -43,7 +43,7 @@ export default function NavBar({ email }: { email: string }) {
                 key={link.href}
                 href={link.href}
                 className={clsx(
-                  "rounded-full px-3 py-1.5 font-bold transition-colors duration-150",
+                  "rounded-full px-3 py-1.5 font-bold transition-colors duration-150 focus-visible:outline-card-raised",
                   pathname?.startsWith(link.href)
                     ? "bg-card-raised/15 text-card-raised"
                     : "text-card-raised/80 hover:bg-card-raised/10 hover:text-card-raised",
@@ -58,7 +58,7 @@ export default function NavBar({ email }: { email: string }) {
           <Link
             href="/instellingen"
             className={clsx(
-              "hidden sm:inline",
+              "hidden rounded-md sm:inline focus-visible:outline-card-raised",
               pathname?.startsWith("/instellingen") && "font-bold text-card-raised",
             )}
           >
@@ -66,7 +66,7 @@ export default function NavBar({ email }: { email: string }) {
           </Link>
           <button
             onClick={handleLogout}
-            className="rounded-full border border-card-raised/45 px-3.5 py-1.5 text-xs font-bold transition-[background-color,transform] duration-150 hover:bg-card-raised/12 active:scale-95"
+            className="cursor-pointer rounded-full border border-card-raised/45 px-3.5 py-1.5 text-xs font-bold transition-[background-color,transform] duration-150 hover:bg-card-raised/12 active:scale-95 focus-visible:outline-card-raised"
           >
             Uitloggen
           </button>

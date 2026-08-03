@@ -17,10 +17,7 @@ export default function StatTile({
     <div
       className={clsx(
         "relative overflow-hidden rounded-md p-4",
-        "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        flat
-          ? "bg-ground-deep"
-          : "border border-line-soft bg-card hover:-translate-y-1 hover:border-line hover:shadow-[0_10px_24px_-14px_rgba(46,32,21,0.4)]",
+        flat ? "bg-ground-deep" : "border border-line-soft bg-card",
       )}
     >
       {!flat && (

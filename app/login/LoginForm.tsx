@@ -68,13 +68,14 @@ export default function LoginForm() {
       <div className="mb-6 flex rounded-full border border-line-soft bg-ground-deep p-1 text-sm font-bold">
         <button
           type="button"
+          aria-pressed={mode === "magic_link"}
           onClick={() => {
             setMode("magic_link");
             setError(null);
             setMagicLinkSent(false);
           }}
           className={clsx(
-            "flex-1 rounded-full px-3 py-1.5 transition-colors duration-150",
+            "flex-1 cursor-pointer rounded-full px-3 py-1.5 transition-[background-color,color,transform] duration-150 active:scale-[0.97]",
             mode === "magic_link"
               ? "bg-moss text-card-raised"
               : "text-ink-soft hover:text-ink",
@@ -84,13 +85,14 @@ export default function LoginForm() {
         </button>
         <button
           type="button"
+          aria-pressed={mode === "password"}
           onClick={() => {
             setMode("password");
             setError(null);
             setMagicLinkSent(false);
           }}
           className={clsx(
-            "flex-1 rounded-full px-3 py-1.5 transition-colors duration-150",
+            "flex-1 cursor-pointer rounded-full px-3 py-1.5 transition-[background-color,color,transform] duration-150 active:scale-[0.97]",
             mode === "password"
               ? "bg-moss text-card-raised"
               : "text-ink-soft hover:text-ink",
