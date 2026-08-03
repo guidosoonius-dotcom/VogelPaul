@@ -15,7 +15,7 @@ export default async function BroedselsPage() {
       {broods.length === 0 ? (
         <p className="mt-8 text-sm text-ink-soft">Nog geen broedsels geregistreerd.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-line-soft bg-card">
+        <div className="mt-6 overflow-x-auto overflow-y-hidden rounded-3xl border border-line-soft bg-card">
           <table className="min-w-full divide-y divide-line-soft text-sm">
             <thead className="bg-ground-deep text-left text-xs font-medium uppercase tracking-wide text-ink-faint">
               <tr>

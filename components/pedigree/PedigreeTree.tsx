@@ -91,7 +91,7 @@ function PedigreeCell({
 }) {
   if (!bird) {
     return (
-      <div className="flex w-40 shrink-0 items-center justify-center rounded-md border border-dashed border-line bg-ground-deep p-3 text-xs text-ink-faint">
+      <div className="flex w-40 shrink-0 items-center justify-center rounded-2xl border border-dashed border-line bg-ground-deep p-3 text-xs text-ink-faint">
         Onbekend
       </div>
     );
@@ -99,7 +99,7 @@ function PedigreeCell({
 
   const content = (
     <div
-      className={`w-40 shrink-0 rounded-md border p-3 text-xs transition-[transform,box-shadow,border-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`w-40 shrink-0 rounded-2xl border p-3 text-xs transition-[transform,box-shadow,border-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isRoot
           ? "border-moss bg-moss-tint"
           : "border-line-soft bg-card hover:-translate-y-0.5 hover:border-moss hover:shadow-[0_8px_20px_-12px_rgba(46,32,21,0.4)]"

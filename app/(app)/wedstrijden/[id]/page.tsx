@@ -42,7 +42,7 @@ export default async function WedstrijdresultaatDetailPage({
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <section className="rounded-lg border border-line-soft bg-card p-4">
+        <section className="rounded-3xl border border-line-soft bg-card p-4">
           <dl className="space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
               <dt className="text-ink-faint">Vogel</dt>
@@ -75,21 +75,21 @@ export default async function WedstrijdresultaatDetailPage({
         </section>
 
         {photoUrl && (
-          <section className="rounded-lg border border-line-soft bg-card p-4">
+          <section className="rounded-3xl border border-line-soft bg-card p-4">
             <Image
               src={photoUrl}
               alt={`Foto bij ${result.show_name}`}
               width={400}
               height={400}
               unoptimized
-              className="h-auto w-full rounded-md object-cover"
+              className="h-auto w-full rounded-2xl object-cover"
             />
           </section>
         )}
       </div>
 
       {result.notes && (
-        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{result.notes}</p>
         </section>

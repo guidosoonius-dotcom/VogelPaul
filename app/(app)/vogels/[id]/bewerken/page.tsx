@@ -34,7 +34,7 @@ export default async function VogelBewerkenPage({
   return (
     <div>
       <h1 className="text-2xl font-bold text-ink">Vogel bewerken</h1>
-      <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
+      <div className="mt-6 max-w-2xl rounded-3xl border border-line-soft bg-card p-6">
         <BirdForm
           species={species}
           birdOptions={birdOptions}

@@ -61,13 +61,13 @@ export default async function BroedselDetailPage({
       </section>
 
       {brood.notes && (
-        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{brood.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Nakomelingen ({offspring.length})
         </h2>
@@ -78,7 +78,7 @@ export default async function BroedselDetailPage({
         ) : (
           <ul className="mt-2 divide-y divide-line-soft text-sm">
             {offspring.map((child) => (
-              <li key={child.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+              <li key={child.id} className="flex justify-between py-2 rounded-xl px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link href={`/vogels/${child.id}`} className="text-moss-ink hover:underline">
                   {formatBirdLabel(child)}
                 </Link>

@@ -61,7 +61,7 @@ export default async function VogelsPage({
           Nog geen vogels toegevoegd. Klik op &quot;Nieuwe vogel&quot; om te beginnen.
         </p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-line-soft bg-card">
+        <div className="mt-6 overflow-x-auto overflow-y-hidden rounded-3xl border border-line-soft bg-card">
           <table className="min-w-full divide-y divide-line-soft text-sm">
             <thead className="bg-ground-deep text-left text-xs font-medium uppercase tracking-wide text-ink-faint">
               <tr>

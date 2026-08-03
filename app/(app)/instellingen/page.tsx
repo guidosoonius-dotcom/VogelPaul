@@ -9,7 +9,7 @@ export default async function InstellingenPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-ink">Instellingen</h1>
-      <div className="mt-6 max-w-md rounded-lg border border-line-soft bg-card p-6">
+      <div className="mt-6 max-w-md rounded-3xl border border-line-soft bg-card p-6">
         <form action={updateProfile} className="space-y-4">
           <FieldWrapper label="Naam" htmlFor="display_name">
             <Input

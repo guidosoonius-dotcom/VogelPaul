@@ -22,7 +22,7 @@ export default async function NieuwKoppelPage() {
           .
         </p>
       ) : (
-        <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
+        <div className="mt-6 max-w-2xl rounded-3xl border border-line-soft bg-card p-6">
           <PairForm maleBirds={maleBirds} femaleBirds={femaleBirds} action={createPair} />
         </div>
       )}

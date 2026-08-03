@@ -2,7 +2,7 @@ import { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttri
 import { clsx } from "@/lib/utils/clsx";
 
 const inputClasses =
-  "block w-full rounded-md border border-line bg-card-raised px-3 py-2 text-sm text-ink shadow-sm placeholder:text-ink-faint transition-colors duration-150 focus:border-moss focus:outline-none focus:ring-1 focus:ring-brass disabled:bg-ground-deep";
+  "block w-full rounded-2xl border-2 border-line bg-card-raised px-4 py-2.5 text-sm text-ink shadow-sm placeholder:text-ink-faint transition-colors duration-150 focus:border-brass focus:outline-none disabled:bg-ground-deep";
 
 export function FieldWrapper({
   label,

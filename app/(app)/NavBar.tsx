@@ -27,14 +27,14 @@ export default function NavBar({ email }: { email: string }) {
   }
 
   return (
-    <header className="bg-moss text-card-raised">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <header className="px-4 pt-4 sm:px-6">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 rounded-3xl bg-ink px-4 py-3 text-card-raised shadow-[0_16px_32px_-18px_rgba(24,20,15,0.55)] sm:flex-row sm:items-center sm:justify-between sm:px-5">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 rounded-md font-display text-lg font-bold focus-visible:outline-card-raised"
+            className="flex items-center gap-2 rounded-full font-display text-lg font-bold focus-visible:outline-brass"
           >
-            <FeatherMark />
+            <FeatherMark veinColor="var(--brass)" />
             VogelPaul
           </Link>
           <nav className="flex flex-wrap gap-x-1 gap-y-1 text-sm">
@@ -43,10 +43,10 @@ export default function NavBar({ email }: { email: string }) {
                 key={link.href}
                 href={link.href}
                 className={clsx(
-                  "rounded-full px-3 py-1.5 font-bold transition-colors duration-150 focus-visible:outline-card-raised",
+                  "rounded-full px-3.5 py-1.5 font-bold transition-colors duration-150 focus-visible:outline-brass",
                   pathname?.startsWith(link.href)
-                    ? "bg-card-raised/15 text-card-raised"
-                    : "text-card-raised/80 hover:bg-card-raised/10 hover:text-card-raised",
+                    ? "bg-brass text-ink"
+                    : "text-card-raised/75 hover:bg-card-raised/10 hover:text-card-raised",
                 )}
               >
                 {link.label}
@@ -54,11 +54,11 @@ export default function NavBar({ email }: { email: string }) {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-3 text-sm text-card-raised/85">
+        <div className="flex items-center gap-3 text-sm text-card-raised/80">
           <Link
             href="/instellingen"
             className={clsx(
-              "hidden rounded-md sm:inline focus-visible:outline-card-raised",
+              "hidden rounded-full sm:inline focus-visible:outline-brass",
               pathname?.startsWith("/instellingen") && "font-bold text-card-raised",
             )}
           >
@@ -66,7 +66,7 @@ export default function NavBar({ email }: { email: string }) {
           </Link>
           <button
             onClick={handleLogout}
-            className="cursor-pointer rounded-full border border-card-raised/45 px-3.5 py-1.5 text-xs font-bold transition-[background-color,transform] duration-150 hover:bg-card-raised/12 active:scale-95 focus-visible:outline-card-raised"
+            className="cursor-pointer rounded-full border-2 border-card-raised/30 px-3.5 py-1.5 text-xs font-bold transition-[background-color,transform] duration-150 hover:bg-card-raised/10 active:scale-95 focus-visible:outline-brass"
           >
             Uitloggen
           </button>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Work_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { IBM_Plex_Mono, Unbounded, Work_Sans } from "next/font/google";
 import "./globals.css";
 
 const workSans = Work_Sans({
@@ -15,12 +14,10 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "700"],
 });
 
-const nationalPark = localFont({
-  variable: "--font-national-park",
-  src: [
-    { path: "./fonts/NationalPark-Regular.ttf", weight: "400", style: "normal" },
-    { path: "./fonts/NationalPark-Bold.ttf", weight: "700", style: "normal" },
-  ],
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${workSans.variable} ${plexMono.variable} ${nationalPark.variable} h-full antialiased`}
+      className={`${workSans.variable} ${plexMono.variable} ${unbounded.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ground text-ink">
         {children}

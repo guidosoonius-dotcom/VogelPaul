@@ -52,7 +52,7 @@ export default async function DashboardPage({
       </section>
 
       {stats.birdsBySpecies.length > 0 && (
-        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Vogels per soort</h2>
           <div className="mt-3 space-y-3">
             {stats.birdsBySpecies.map((entry, i) => (
@@ -73,7 +73,7 @@ export default async function DashboardPage({
         </section>
       )}
 
-      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Broedresultaten dit seizoen</h2>
         <div className="mt-3 grid grid-cols-3 gap-4">
           <StatTile label="Eieren gelegd" value={stats.eggsLaidThisSeason} flat />
@@ -129,12 +129,12 @@ export default async function DashboardPage({
         {prizeShowcase.length === 0 ? (
           <p className="mt-4 text-sm text-ink-soft">Nog geen prijswinnaars voor deze selectie.</p>
         ) : (
-          <ul className="mt-4 divide-y divide-line-soft rounded-lg border border-line-soft bg-card px-2 text-sm">
+          <ul className="mt-4 divide-y divide-line-soft rounded-3xl border border-line-soft bg-card px-2 text-sm">
             {prizeShowcase.map((entry) => (
               <li key={entry.id}>
                 <Link
                   href={`/wedstrijden/${entry.id}`}
-                  className="flex items-center gap-3.5 rounded-md px-2 py-3 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep"
+                  className="flex items-center gap-3.5 rounded-xl px-2 py-3 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brass/25 bg-brass-tint font-mono text-xs font-bold text-brass">
                     {(entry.ranking ?? "?").slice(0, 2)}

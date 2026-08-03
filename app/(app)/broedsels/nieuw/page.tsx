@@ -29,7 +29,7 @@ export default async function NieuwBroedselPage({
         Koppel: {pair.male_bird ? formatBirdLabel(pair.male_bird) : "?"} &times;{" "}
         {pair.female_bird ? formatBirdLabel(pair.female_bird) : "?"}
       </p>
-      <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
+      <div className="mt-6 max-w-2xl rounded-3xl border border-line-soft bg-card p-6">
         <BroodForm action={createBroodForPair} submitLabel="Broedsel toevoegen" />
       </div>
     </div>

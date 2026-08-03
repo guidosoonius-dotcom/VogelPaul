@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
-/* VogelPaul — "Het Studboek": warme, aardse stijl geïnspireerd op een
-   kwekersstudboek, met de kanarie-ringkleurcyclus als terugkerend motief. */
+/* VogelPaul — boldere, fotogedreven stijl op een warme roomkleurige basis:
+   grote pilvormen, zware kop-typografie, en marigold als sprekend accent
+   naast de kanarie-ringkleurcyclus (echte productlogica). */
 
 :root {
-  --ground: #ede3cc;
-  --ground-deep: #e2d5b7;
-  --card: #faf5e8;
-  --card-raised: #fffcf4;
-  --ink: #2e2015;
-  --ink-soft: #5c4a38;
-  --ink-faint: #8a7860;
-  --line: #cbb88f;
-  --line-soft: #ddcba4;
+  --ground: #f3ecdd;
+  --ground-deep: #eae0c8;
+  --card: #fdfaf3;
+  --card-raised: #ffffff;
+  --ink: #18140f;
+  --ink-soft: #59503f;
+  --ink-faint: #8d8271;
+  --line: #e4d9c2;
+  --line-soft: #eee5d2;
 
-  --moss: #3c6b3f;
+  --moss: #3f7a48;
   --moss-ink: #1f3d22;
-  --moss-tint: #dce6d2;
-  --brass: #a8721f;
-  --brass-tint: #f0dfb8;
-  --brick: #a8452c;
-  --brick-tint: #f1dcd2;
+  --moss-tint: #dce9d5;
+  --brass: #e2a13b;
+  --brass-tint: #f7e7c4;
+  --brick: #b84b2a;
+  --brick-tint: #f4ddd0;
 
   /* ringkleurcyclus (echte productlogica, ook als ontwerpelement) */
   --ring-groen: #4b7a43;
@@ -33,23 +34,23 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ground: #1b1b14;
-    --ground-deep: #15150f;
-    --card: #24241a;
-    --card-raised: #2b2b1f;
-    --ink: #ede3ce;
-    --ink-soft: #c4b79b;
-    --ink-faint: #8c826d;
-    --line: #423f2e;
-    --line-soft: #35331f;
+    --ground: #17140f;
+    --ground-deep: #100d09;
+    --card: #201c15;
+    --card-raised: #262019;
+    --ink: #f3ecdd;
+    --ink-soft: #c7bba0;
+    --ink-faint: #8d8271;
+    --line: #3a331f;
+    --line-soft: #2a2418;
 
-    --moss: #7fb26b;
+    --moss: #7bb26b;
     --moss-ink: #d7e8cc;
-    --moss-tint: #2c3a25;
-    --brass: #d9a64e;
-    --brass-tint: #3a2f19;
-    --brick: #d9825f;
-    --brick-tint: #3b2620;
+    --moss-tint: #2a3b24;
+    --brass: #e8b15c;
+    --brass-tint: #3d2e14;
+    --brick: #dd8562;
+    --brick-tint: #3e2620;
 
     --ring-groen: #6b9d5f;
     --ring-paars: #9578a6;
@@ -87,7 +88,7 @@
   --color-ring-zwart: var(--ring-zwart);
 
   --font-sans: var(--font-work-sans);
-  --font-display: var(--font-national-park);
+  --font-display: var(--font-unbounded);
   --font-mono: var(--font-plex-mono);
 
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);

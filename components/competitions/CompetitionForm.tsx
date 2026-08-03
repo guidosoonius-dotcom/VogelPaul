@@ -109,7 +109,7 @@ export default function CompetitionForm({
             width={80}
             height={80}
             unoptimized
-            className="mb-2 h-20 w-20 rounded-md object-cover"
+            className="mb-2 h-20 w-20 rounded-2xl object-cover"
           />
         )}
         <Input id="photo" name="photo" type="file" accept="image/*" />

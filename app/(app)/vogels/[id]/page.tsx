@@ -64,7 +64,7 @@ export default async function VogelDetailPage({
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <section className="rounded-lg border border-line-soft bg-card p-4">
+        <section className="rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Ringgegevens</h2>
           <dl className="mt-2 space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
@@ -97,7 +97,7 @@ export default async function VogelDetailPage({
           </dl>
         </section>
 
-        <section className="rounded-lg border border-line-soft bg-card p-4">
+        <section className="rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Afstamming</h2>
           <dl className="mt-2 space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
@@ -129,13 +129,13 @@ export default async function VogelDetailPage({
       </div>
 
       {bird.notes && (
-        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{bird.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Nakomelingen ({offspring.length})
         </h2>
@@ -144,7 +144,7 @@ export default async function VogelDetailPage({
         ) : (
           <ul className="mt-2 divide-y divide-line-soft text-sm">
             {offspring.map((child) => (
-              <li key={child.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+              <li key={child.id} className="flex justify-between py-2 rounded-xl px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link href={`/vogels/${child.id}`} className="text-moss-ink hover:underline">
                   {formatBirdLabel(child)}
                 </Link>
@@ -155,7 +155,7 @@ export default async function VogelDetailPage({
         )}
       </section>
 
-      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <div className="flex items-center justify-between">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
             Wedstrijdresultaten ({competitionResults.length})
@@ -174,7 +174,7 @@ export default async function VogelDetailPage({
         ) : (
           <ul className="mt-2 divide-y divide-line-soft text-sm">
             {competitionResults.map((result) => (
-              <li key={result.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+              <li key={result.id} className="flex justify-between py-2 rounded-xl px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link
                   href={`/wedstrijden/${result.id}`}
                   className="text-moss-ink hover:underline"

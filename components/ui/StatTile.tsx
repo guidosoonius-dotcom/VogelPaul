@@ -16,14 +16,14 @@ export default function StatTile({
   return (
     <div
       className={clsx(
-        "relative overflow-hidden rounded-md p-4",
-        flat ? "bg-ground-deep" : "border border-line-soft bg-card",
+        "relative overflow-hidden rounded-2xl p-4",
+        flat ? "bg-ground-deep" : "border-2 border-line-soft bg-card",
       )}
     >
       {!flat && (
         <span
           className={clsx(
-            "absolute inset-y-0 left-0 w-[3px]",
+            "absolute inset-y-0 left-0 w-1 rounded-l-2xl",
             accent === "brass" ? "bg-brass" : "bg-moss",
           )}
         />
@@ -33,7 +33,12 @@ export default function StatTile({
           {trend}
         </span>
       )}
-      <div className={clsx("font-mono font-bold tabular-nums leading-none", flat ? "text-xl" : "text-3xl")}>
+      <div
+        className={clsx(
+          "font-display font-black tabular-nums leading-none",
+          flat ? "text-xl" : "text-3xl",
+        )}
+      >
         {value}
       </div>
       <div className="mt-2 text-xs text-ink-soft">{label}</div>

@@ -154,7 +154,7 @@ export default function BirdForm({
         </FieldWrapper>
       </div>
 
-      <fieldset className="rounded-lg border border-line-soft p-4">
+      <fieldset className="rounded-2xl border border-line-soft p-4">
         <legend className="px-1 font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Ringgegevens
         </legend>
@@ -233,7 +233,7 @@ export default function BirdForm({
         )}
       </fieldset>
 
-      <fieldset className="rounded-lg border border-line-soft p-4">
+      <fieldset className="rounded-2xl border border-line-soft p-4">
         <legend className="px-1 font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Afstamming
         </legend>

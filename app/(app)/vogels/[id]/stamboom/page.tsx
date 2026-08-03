@@ -40,7 +40,7 @@ export default async function StamboomPage({
         &quot;Onbekend&quot;.
       </p>
 
-      <div className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <div className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <PedigreeTree rootBird={bird} ancestorsByRelation={byRelation} maxDepth={MAX_DEPTH} />
       </div>
     </div>

@@ -64,7 +64,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="rounded-lg border border-line-soft bg-card p-6 shadow-sm">
+    <div className="rounded-3xl border-2 border-line-soft bg-card p-6 shadow-sm">
       <div className="mb-6 flex rounded-full border border-line-soft bg-ground-deep p-1 text-sm font-bold">
         <button
           type="button"
@@ -77,7 +77,7 @@ export default function LoginForm() {
           className={clsx(
             "flex-1 cursor-pointer rounded-full px-3 py-1.5 transition-[background-color,color,transform] duration-150 active:scale-[0.97]",
             mode === "magic_link"
-              ? "bg-moss text-card-raised"
+              ? "bg-ink text-card-raised"
               : "text-ink-soft hover:text-ink",
           )}
         >
@@ -94,7 +94,7 @@ export default function LoginForm() {
           className={clsx(
             "flex-1 cursor-pointer rounded-full px-3 py-1.5 transition-[background-color,color,transform] duration-150 active:scale-[0.97]",
             mode === "password"
-              ? "bg-moss text-card-raised"
+              ? "bg-ink text-card-raised"
               : "text-ink-soft hover:text-ink",
           )}
         >

@@ -54,13 +54,13 @@ export default async function KoppelDetailPage({
       </div>
 
       {pair.notes && (
-        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
           <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{pair.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+      <section className="mt-6 rounded-3xl border border-line-soft bg-card p-4">
         <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Broedsels ({broods.length})
         </h2>
@@ -69,7 +69,7 @@ export default async function KoppelDetailPage({
         ) : (
           <ul className="mt-2 divide-y divide-line-soft text-sm">
             {broods.map((brood) => (
-              <li key={brood.id} className="flex items-center justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+              <li key={brood.id} className="flex items-center justify-between py-2 rounded-xl px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link
                   href={`/broedsels/${brood.id}`}
                   className="text-moss-ink hover:underline"
