@@ -12,6 +12,8 @@ function formatPercent(value: number | null): string {
   return `${Math.round(value * 100)}%`;
 }
 
+const BAR_COLORS = ["bg-moss", "bg-brass", "bg-ring-blauw", "bg-ring-bruin"];
+
 export default async function DashboardPage({
   searchParams,
 }: {
@@ -34,48 +36,59 @@ export default async function DashboardPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-zinc-900">Dashboard</h1>
+      <h1 className="text-2xl font-bold text-ink">Dashboard</h1>
+      <p className="mt-1 text-sm text-ink-soft">
+        Seizoen {currentYear} &middot; overzicht van je volière
+      </p>
 
       <section className="mt-6">
-        <h2 className="text-sm font-medium text-zinc-800">Overzicht</h2>
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Overzicht</h2>
         <div className="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <StatTile label="Vogels totaal" value={stats.totalBirds} />
           <StatTile label="Actieve koppels" value={stats.activePairsCount} />
-          <StatTile label="Broedsels dit seizoen" value={stats.broodsThisSeason} />
+          <StatTile label="Broedsels dit seizoen" value={stats.broodsThisSeason} accent="brass" />
           <StatTile label="Uitkomstpercentage" value={formatPercent(stats.hatchRate)} />
         </div>
       </section>
 
       {stats.birdsBySpecies.length > 0 && (
-        <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Vogels per soort</h2>
-          <ul className="mt-2 space-y-1 text-sm text-zinc-700">
-            {stats.birdsBySpecies.map((entry) => (
-              <li key={entry.speciesId} className="flex justify-between">
-                <span>{entry.speciesName}</span>
-                <span className="font-medium">{entry.count}</span>
-              </li>
+        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Vogels per soort</h2>
+          <div className="mt-3 space-y-3">
+            {stats.birdsBySpecies.map((entry, i) => (
+              <div key={entry.speciesId} className="flex items-center gap-3">
+                <div className="w-28 shrink-0 text-sm font-bold text-ink">{entry.speciesName}</div>
+                <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-ground-deep">
+                  <div
+                    className={`h-full rounded-full ${BAR_COLORS[i % BAR_COLORS.length]}`}
+                    style={{ width: `${(entry.count / stats.totalBirds) * 100}%` }}
+                  />
+                </div>
+                <div className="w-7 shrink-0 text-right font-mono text-sm tabular-nums text-ink-soft">
+                  {entry.count}
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
-      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-        <h2 className="text-sm font-medium text-zinc-800">Broedresultaten dit seizoen</h2>
-        <div className="mt-2 grid grid-cols-3 gap-4">
-          <StatTile label="Eieren gelegd" value={stats.eggsLaidThisSeason} />
-          <StatTile label="Uitgekomen" value={stats.eggsHatchedThisSeason} />
-          <StatTile label="Uitgevlogen" value={stats.chicksFledgedThisSeason} />
+      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Broedresultaten dit seizoen</h2>
+        <div className="mt-3 grid grid-cols-3 gap-4">
+          <StatTile label="Eieren gelegd" value={stats.eggsLaidThisSeason} flat />
+          <StatTile label="Uitgekomen" value={stats.eggsHatchedThisSeason} flat />
+          <StatTile label="Uitgevlogen" value={stats.chicksFledgedThisSeason} flat />
         </div>
-        <p className="mt-2 text-xs text-zinc-500">
+        <p className="mt-3 text-xs text-ink-faint">
           Uitvliegpercentage (van uitgekomen naar uitgevlogen): {formatPercent(stats.fledgeRate)}
         </p>
       </section>
 
       <section className="mt-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className="text-sm font-medium text-zinc-800">Prijswinnaars</h2>
-          <Link href="/wedstrijden" className="text-sm text-emerald-800 hover:underline">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Prijswinnaars</h2>
+          <Link href="/wedstrijden" className="text-sm text-moss-ink hover:underline">
             Alle wedstrijden
           </Link>
         </div>
@@ -114,23 +127,28 @@ export default async function DashboardPage({
         </form>
 
         {prizeShowcase.length === 0 ? (
-          <p className="mt-4 text-sm text-zinc-600">Nog geen prijswinnaars voor deze selectie.</p>
+          <p className="mt-4 text-sm text-ink-soft">Nog geen prijswinnaars voor deze selectie.</p>
         ) : (
-          <ul className="mt-4 divide-y divide-zinc-100 rounded-md border border-zinc-200 bg-white text-sm">
+          <ul className="mt-4 divide-y divide-line-soft rounded-lg border border-line-soft bg-card px-2 text-sm">
             {prizeShowcase.map((entry) => (
-              <li key={entry.id} className="flex items-center justify-between px-4 py-3">
-                <div>
-                  <Link
-                    href={`/wedstrijden/${entry.id}`}
-                    className="font-medium text-emerald-800 hover:underline"
-                  >
-                    {entry.show_name}
-                  </Link>
-                  <p className="text-xs text-zinc-500">
-                    {entry.bird ? formatBirdLabel(entry.bird) : "-"} &middot; {entry.show_date}
-                  </p>
-                </div>
-                <span className="text-zinc-700">{entry.ranking ?? entry.points ?? "-"}</span>
+              <li key={entry.id}>
+                <Link
+                  href={`/wedstrijden/${entry.id}`}
+                  className="flex items-center gap-3.5 rounded-md px-2 py-3 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brass/25 bg-brass-tint font-mono text-xs font-bold text-brass">
+                    {(entry.ranking ?? "?").slice(0, 2)}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate font-bold text-ink">{entry.show_name}</span>
+                    <span className="block truncate text-xs text-ink-faint">
+                      {entry.bird ? formatBirdLabel(entry.bird) : "-"} &middot; {entry.show_date}
+                    </span>
+                  </span>
+                  <span className="shrink-0 font-mono text-sm font-bold text-moss-ink">
+                    {entry.points ? `${entry.points} pt` : entry.ranking ?? "-"}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

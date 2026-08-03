@@ -11,18 +11,18 @@ export default async function NieuwKoppelPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-zinc-900">Nieuw koppel</h1>
+      <h1 className="text-2xl font-bold text-ink">Nieuw koppel</h1>
       {maleBirds.length === 0 || femaleBirds.length === 0 ? (
-        <p className="mt-6 text-sm text-zinc-600">
+        <p className="mt-6 text-sm text-ink-soft">
           Je hebt minstens één actieve man en één actieve pop nodig om een
           koppel te vormen.{" "}
-          <Link href="/vogels/nieuw" className="text-emerald-800 hover:underline">
+          <Link href="/vogels/nieuw" className="text-moss-ink hover:underline">
             Voeg een vogel toe
           </Link>
           .
         </p>
       ) : (
-        <div className="mt-6 max-w-2xl rounded-md border border-zinc-200 bg-white p-6">
+        <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
           <PairForm maleBirds={maleBirds} femaleBirds={femaleBirds} action={createPair} />
         </div>
       )}

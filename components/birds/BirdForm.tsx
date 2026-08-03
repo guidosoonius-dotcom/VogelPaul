@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FieldWrapper, Input, Select, Textarea } from "@/components/ui/Field";
-import { computeCanaryRingColor } from "@/lib/domain/ringColor";
+import { computeCanaryRingColor, getRingColorSwatch } from "@/lib/domain/ringColor";
 import { formatBirdLabel } from "@/lib/domain/birdLabel";
 import type { BirdSex, BirdStatus } from "@/lib/types/database.types";
 
@@ -151,8 +151,8 @@ export default function BirdForm({
         </FieldWrapper>
       </div>
 
-      <fieldset className="rounded-md border border-zinc-200 p-4">
-        <legend className="px-1 text-sm font-medium text-zinc-800">
+      <fieldset className="rounded-lg border border-line-soft p-4">
+        <legend className="px-1 font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Ringgegevens
         </legend>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -183,16 +183,25 @@ export default function BirdForm({
                 : undefined
             }
           >
-            <Input
-              id="ring_color"
-              name="ring_color"
-              value={effectiveColor}
-              onChange={(e) => {
-                setRingColor(e.target.value);
-                setOverridden(true);
-              }}
-              placeholder={suggestedColor ?? "bv. groen"}
-            />
+            <div className="relative">
+              {getRingColorSwatch(effectiveColor) && (
+                <span
+                  className="absolute left-3 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full border border-black/15"
+                  style={{ backgroundColor: getRingColorSwatch(effectiveColor)! }}
+                />
+              )}
+              <Input
+                id="ring_color"
+                name="ring_color"
+                value={effectiveColor}
+                onChange={(e) => {
+                  setRingColor(e.target.value);
+                  setOverridden(true);
+                }}
+                placeholder={suggestedColor ?? "bv. groen"}
+                className={getRingColorSwatch(effectiveColor) ? "pl-8" : undefined}
+              />
+            </div>
           </FieldWrapper>
           <FieldWrapper label="Verenigingscode" htmlFor="ring_federation_code">
             <Input
@@ -209,7 +218,7 @@ export default function BirdForm({
           value={overridden ? "on" : ""}
         />
         {suggestedColor && (
-          <label className="mt-2 flex items-center gap-2 text-xs text-zinc-600">
+          <label className="mt-2 flex items-center gap-2 text-xs text-ink-soft">
             <input
               type="checkbox"
               checked={overridden}
@@ -220,8 +229,8 @@ export default function BirdForm({
         )}
       </fieldset>
 
-      <fieldset className="rounded-md border border-zinc-200 p-4">
-        <legend className="px-1 text-sm font-medium text-zinc-800">
+      <fieldset className="rounded-lg border border-line-soft p-4">
+        <legend className="px-1 font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Afstamming
         </legend>
         <div className="grid gap-4 sm:grid-cols-2">

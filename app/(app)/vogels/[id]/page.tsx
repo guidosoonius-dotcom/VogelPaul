@@ -6,6 +6,7 @@ import { listCompetitionResults } from "@/lib/queries/competitions";
 import { getSignedPhotoUrl } from "@/lib/storage/photos";
 import { formatBirdLabel, formatSex, formatStatus } from "@/lib/domain/birdLabel";
 import { Button } from "@/components/ui/Button";
+import RingColorChip from "@/components/ui/RingColorChip";
 
 export default async function VogelDetailPage({
   params,
@@ -43,10 +44,10 @@ export default async function VogelDetailPage({
             />
           )}
           <div>
-            <h1 className="text-2xl font-semibold text-zinc-900">
+            <h1 className="text-2xl font-bold text-ink">
               {formatBirdLabel(bird)}
             </h1>
-            <p className="text-sm text-zinc-600">
+            <p className="text-sm text-ink-soft">
               {bird.species?.name_nl} &middot; {formatSex(bird.sex)} &middot;{" "}
               {formatStatus(bird.status)}
             </p>
@@ -63,47 +64,47 @@ export default async function VogelDetailPage({
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <section className="rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Ringgegevens</h2>
-          <dl className="mt-2 space-y-1 text-sm text-zinc-700">
+        <section className="rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Ringgegevens</h2>
+          <dl className="mt-2 space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Ringnummer</dt>
+              <dt className="text-ink-faint">Ringnummer</dt>
               <dd>{bird.ring_number ?? "-"}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Jaar</dt>
+              <dt className="text-ink-faint">Jaar</dt>
               <dd>{bird.ring_year ?? "-"}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Kleur</dt>
+              <dt className="text-ink-faint">Kleur</dt>
               <dd>
-                {bird.ring_color ?? "-"}
+                <RingColorChip color={bird.ring_color} />
                 {bird.ring_color_overridden && (
-                  <span className="ml-1 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-800">
+                  <span className="ml-1 rounded-full bg-brass-tint px-1.5 py-0.5 text-xs font-bold text-brass">
                     aangepast
                   </span>
                 )}
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Vereniging</dt>
+              <dt className="text-ink-faint">Vereniging</dt>
               <dd>{bird.ring_federation_code ?? "-"}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Geboortedatum</dt>
+              <dt className="text-ink-faint">Geboortedatum</dt>
               <dd>{bird.birth_date ?? "-"}</dd>
             </div>
           </dl>
         </section>
 
-        <section className="rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Afstamming</h2>
-          <dl className="mt-2 space-y-1 text-sm text-zinc-700">
+        <section className="rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Afstamming</h2>
+          <dl className="mt-2 space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Vader</dt>
+              <dt className="text-ink-faint">Vader</dt>
               <dd>
                 {bird.father ? (
-                  <Link href={`/vogels/${bird.father.id}`} className="text-emerald-800 hover:underline">
+                  <Link href={`/vogels/${bird.father.id}`} className="text-moss-ink hover:underline">
                     {formatBirdLabel(bird.father)}
                   </Link>
                 ) : (
@@ -112,10 +113,10 @@ export default async function VogelDetailPage({
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Moeder</dt>
+              <dt className="text-ink-faint">Moeder</dt>
               <dd>
                 {bird.mother ? (
-                  <Link href={`/vogels/${bird.mother.id}`} className="text-emerald-800 hover:underline">
+                  <Link href={`/vogels/${bird.mother.id}`} className="text-moss-ink hover:underline">
                     {formatBirdLabel(bird.mother)}
                   </Link>
                 ) : (
@@ -128,59 +129,59 @@ export default async function VogelDetailPage({
       </div>
 
       {bird.notes && (
-        <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Notities</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">{bird.notes}</p>
+        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
+          <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{bird.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-        <h2 className="text-sm font-medium text-zinc-800">
+      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Nakomelingen ({offspring.length})
         </h2>
         {offspring.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600">Nog geen nakomelingen geregistreerd.</p>
+          <p className="mt-2 text-sm text-ink-soft">Nog geen nakomelingen geregistreerd.</p>
         ) : (
-          <ul className="mt-2 divide-y divide-zinc-100 text-sm">
+          <ul className="mt-2 divide-y divide-line-soft text-sm">
             {offspring.map((child) => (
-              <li key={child.id} className="flex justify-between py-2">
-                <Link href={`/vogels/${child.id}`} className="text-emerald-800 hover:underline">
+              <li key={child.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+                <Link href={`/vogels/${child.id}`} className="text-moss-ink hover:underline">
                   {formatBirdLabel(child)}
                 </Link>
-                <span className="text-zinc-500">{formatSex(child.sex)}</span>
+                <span className="text-ink-faint">{formatSex(child.sex)}</span>
               </li>
             ))}
           </ul>
         )}
       </section>
 
-      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
+      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-medium text-zinc-800">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
             Wedstrijdresultaten ({competitionResults.length})
           </h2>
           <Link
             href={`/wedstrijden/nieuw?bird=${id}`}
-            className="text-sm text-emerald-800 hover:underline"
+            className="text-sm text-moss-ink hover:underline"
           >
             Resultaat toevoegen
           </Link>
         </div>
         {competitionResults.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600">
+          <p className="mt-2 text-sm text-ink-soft">
             Nog geen wedstrijdresultaten geregistreerd.
           </p>
         ) : (
-          <ul className="mt-2 divide-y divide-zinc-100 text-sm">
+          <ul className="mt-2 divide-y divide-line-soft text-sm">
             {competitionResults.map((result) => (
-              <li key={result.id} className="flex justify-between py-2">
+              <li key={result.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link
                   href={`/wedstrijden/${result.id}`}
-                  className="text-emerald-800 hover:underline"
+                  className="text-moss-ink hover:underline"
                 >
                   {result.show_name} ({result.show_date})
                 </Link>
-                <span className="text-zinc-500">{result.ranking ?? result.points ?? "-"}</span>
+                <span className="text-ink-faint">{result.ranking ?? result.points ?? "-"}</span>
               </li>
             ))}
           </ul>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatBirdLabel, formatSex } from "@/lib/domain/birdLabel";
+import RingColorChip from "@/components/ui/RingColorChip";
 import type { AncestorRow } from "@/lib/queries/pedigree";
 
 export interface PedigreeRootBird {
@@ -60,7 +61,7 @@ function PedigreeNode({
     <div className="flex items-stretch gap-3">
       <PedigreeCell bird={bird} isRoot={isRoot} />
       {hasMoreGenerations && (
-        <div className="flex flex-col justify-around gap-3 border-l border-zinc-200 pl-3">
+        <div className="flex flex-col justify-around gap-3 border-l border-line-soft pl-3">
           <PedigreeNode
             bird={father}
             relation={fatherRelation}
@@ -90,7 +91,7 @@ function PedigreeCell({
 }) {
   if (!bird) {
     return (
-      <div className="flex w-40 shrink-0 items-center justify-center rounded-md border border-dashed border-zinc-300 bg-zinc-50 p-3 text-xs text-zinc-400">
+      <div className="flex w-40 shrink-0 items-center justify-center rounded-md border border-dashed border-line bg-ground-deep p-3 text-xs text-ink-faint">
         Onbekend
       </div>
     );
@@ -98,21 +99,25 @@ function PedigreeCell({
 
   const content = (
     <div
-      className={`w-40 shrink-0 rounded-md border p-3 text-xs ${
-        isRoot ? "border-emerald-300 bg-emerald-50" : "border-zinc-200 bg-white"
+      className={`w-40 shrink-0 rounded-md border p-3 text-xs transition-[transform,box-shadow,border-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isRoot
+          ? "border-moss bg-moss-tint"
+          : "border-line-soft bg-card hover:-translate-y-0.5 hover:border-moss hover:shadow-[0_8px_20px_-12px_rgba(46,32,21,0.4)]"
       }`}
     >
-      <div className="font-medium text-zinc-900">{formatBirdLabel(bird)}</div>
-      <div className="mt-1 text-zinc-500">{formatSex(bird.sex)}</div>
-      {bird.ring_color && <div className="text-zinc-500">Ring: {bird.ring_color}</div>}
+      <div className="font-bold text-ink">{formatBirdLabel(bird)}</div>
+      <div className="mt-1 text-ink-faint">{formatSex(bird.sex)}</div>
+      {bird.ring_color && (
+        <div className="mt-1 text-ink-faint">
+          <RingColorChip color={bird.ring_color} />
+        </div>
+      )}
     </div>
   );
 
   return isRoot ? (
     content
   ) : (
-    <Link href={`/vogels/${bird.id}`} className="hover:opacity-80">
-      {content}
-    </Link>
+    <Link href={`/vogels/${bird.id}`}>{content}</Link>
   );
 }

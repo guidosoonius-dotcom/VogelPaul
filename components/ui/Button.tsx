@@ -5,11 +5,11 @@ type Variant = "primary" | "secondary" | "danger" | "ghost";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-emerald-700 text-white hover:bg-emerald-800 disabled:bg-emerald-300",
+    "bg-moss text-card-raised hover:bg-moss-ink disabled:bg-moss/40",
   secondary:
-    "bg-white text-zinc-900 border border-zinc-300 hover:bg-zinc-50 disabled:text-zinc-400",
-  danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300",
-  ghost: "text-zinc-700 hover:bg-zinc-100 disabled:text-zinc-400",
+    "bg-card-raised text-ink border border-line hover:border-moss disabled:text-ink-faint",
+  danger: "bg-brick text-card-raised hover:brightness-90 disabled:bg-brick/40",
+  ghost: "text-ink-soft border border-line hover:border-moss hover:text-ink disabled:text-ink-faint",
 };
 
 export const Button = forwardRef<
@@ -20,7 +20,10 @@ export const Button = forwardRef<
     <button
       ref={ref}
       className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed",
+        "inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-bold",
+        "transition-[transform,box-shadow,background-color,border-color,color] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "hover:-translate-y-0.5 hover:shadow-[0_4px_14px_-6px_rgba(46,32,21,0.35)] active:translate-y-0 active:scale-[0.97] active:shadow-none",
+        "disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none",
         variantClasses[variant],
         className,
       )}

@@ -4,6 +4,7 @@ import { getSpeciesList } from "@/lib/queries/species";
 import { formatBirdLabel, formatSex, formatStatus } from "@/lib/domain/birdLabel";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Field";
+import RingColorChip from "@/components/ui/RingColorChip";
 import type { BirdSex, BirdStatus } from "@/lib/types/database.types";
 
 export default async function VogelsPage({
@@ -22,7 +23,7 @@ export default async function VogelsPage({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-zinc-900">Vogels</h1>
+        <h1 className="text-2xl font-bold text-ink">Vogels</h1>
         <Link href="/vogels/nieuw">
           <Button>Nieuwe vogel</Button>
         </Link>
@@ -56,13 +57,13 @@ export default async function VogelsPage({
       </form>
 
       {birds.length === 0 ? (
-        <p className="mt-8 text-sm text-zinc-600">
+        <p className="mt-8 text-sm text-ink-soft">
           Nog geen vogels toegevoegd. Klik op &quot;Nieuwe vogel&quot; om te beginnen.
         </p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-md border border-zinc-200 bg-white">
-          <table className="min-w-full divide-y divide-zinc-200 text-sm">
-            <thead className="bg-zinc-50 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-line-soft bg-card">
+          <table className="min-w-full divide-y divide-line-soft text-sm">
+            <thead className="bg-ground-deep text-left text-xs font-medium uppercase tracking-wide text-ink-faint">
               <tr>
                 <th className="px-4 py-2">Vogel</th>
                 <th className="px-4 py-2">Soort</th>
@@ -71,26 +72,31 @@ export default async function VogelsPage({
                 <th className="px-4 py-2">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100">
+            <tbody className="divide-y divide-line-soft">
               {birds.map((bird) => (
-                <tr key={bird.id} className="hover:bg-zinc-50">
+                <tr key={bird.id} className="transition-colors duration-150 hover:bg-ground-deep">
                   <td className="px-4 py-2">
                     <Link
                       href={`/vogels/${bird.id}`}
-                      className="font-medium text-emerald-800 hover:underline"
+                      className="font-medium text-moss-ink hover:underline"
                     >
                       {formatBirdLabel(bird)}
                     </Link>
                   </td>
-                  <td className="px-4 py-2 text-zinc-600">
+                  <td className="px-4 py-2 text-ink-soft">
                     {bird.species?.name_nl ?? "-"}
                   </td>
-                  <td className="px-4 py-2 text-zinc-600">{formatSex(bird.sex)}</td>
-                  <td className="px-4 py-2 text-zinc-600">
+                  <td className="px-4 py-2 text-ink-soft">{formatSex(bird.sex)}</td>
+                  <td className="px-4 py-2 text-ink-soft">
                     {bird.ring_number ?? "-"}
-                    {bird.ring_color ? ` (${bird.ring_color})` : ""}
+                    {bird.ring_color && (
+                      <>
+                        {" "}
+                        (<RingColorChip color={bird.ring_color} />)
+                      </>
+                    )}
                   </td>
-                  <td className="px-4 py-2 text-zinc-600">{formatStatus(bird.status)}</td>
+                  <td className="px-4 py-2 text-ink-soft">{formatStatus(bird.status)}</td>
                 </tr>
               ))}
             </tbody>

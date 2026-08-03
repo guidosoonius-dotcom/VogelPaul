@@ -22,8 +22,8 @@ export default async function BroedselBewerkenPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-zinc-900">Broedsel bewerken</h1>
-      <div className="mt-6 max-w-2xl rounded-md border border-zinc-200 bg-white p-6">
+      <h1 className="text-2xl font-bold text-ink">Broedsel bewerken</h1>
+      <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
         <BroodForm
           initialData={brood}
           action={updateBroodWithId}

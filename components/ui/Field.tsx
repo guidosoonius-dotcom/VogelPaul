@@ -2,7 +2,7 @@ import { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttri
 import { clsx } from "@/lib/utils/clsx";
 
 const inputClasses =
-  "block w-full rounded-md border border-zinc-300 px-3 py-2 text-sm text-zinc-900 shadow-sm placeholder:text-zinc-400 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600 disabled:bg-zinc-100";
+  "block w-full rounded-md border border-line bg-card-raised px-3 py-2 text-sm text-ink shadow-sm placeholder:text-ink-faint transition-colors duration-150 focus:border-moss focus:outline-none focus:ring-1 focus:ring-brass disabled:bg-ground-deep";
 
 export function FieldWrapper({
   label,
@@ -19,12 +19,12 @@ export function FieldWrapper({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-sm font-medium text-zinc-800">
+      <label htmlFor={htmlFor} className="block text-sm font-bold text-ink">
         {label}
       </label>
       {children}
-      {hint && !error && <p className="text-xs text-zinc-500">{hint}</p>}
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {hint && !error && <p className="text-xs text-ink-faint">{hint}</p>}
+      {error && <p className="text-xs text-brick">{error}</p>}
     </div>
   );
 }
@@ -46,7 +46,14 @@ export function Select({
   ...props
 }: SelectHTMLAttributes<HTMLSelectElement>) {
   return (
-    <select className={clsx(inputClasses, "bg-white", className)} {...props}>
+    <select
+      className={clsx(
+        inputClasses,
+        "appearance-none bg-[linear-gradient(45deg,transparent_50%,var(--ink-soft)_50%),linear-gradient(135deg,var(--ink-soft)_50%,transparent_50%)] bg-[position:calc(100%-16px)_center,calc(100%-11px)_center] bg-[size:5px_5px,5px_5px] bg-no-repeat pr-8",
+        className,
+      )}
+      {...props}
+    >
       {children}
     </select>
   );

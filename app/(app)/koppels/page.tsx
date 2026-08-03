@@ -9,20 +9,20 @@ export default async function KoppelsPage() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-zinc-900">Koppels</h1>
+        <h1 className="text-2xl font-bold text-ink">Koppels</h1>
         <Link href="/koppels/nieuw">
           <Button>Nieuw koppel</Button>
         </Link>
       </div>
 
       {pairs.length === 0 ? (
-        <p className="mt-8 text-sm text-zinc-600">
+        <p className="mt-8 text-sm text-ink-soft">
           Nog geen koppels toegevoegd. Klik op &quot;Nieuw koppel&quot; om te beginnen.
         </p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-md border border-zinc-200 bg-white">
-          <table className="min-w-full divide-y divide-zinc-200 text-sm">
-            <thead className="bg-zinc-50 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-line-soft bg-card">
+          <table className="min-w-full divide-y divide-line-soft text-sm">
+            <thead className="bg-ground-deep text-left text-xs font-medium uppercase tracking-wide text-ink-faint">
               <tr>
                 <th className="px-4 py-2">Man</th>
                 <th className="px-4 py-2">Pop</th>
@@ -30,22 +30,22 @@ export default async function KoppelsPage() {
                 <th className="px-4 py-2">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100">
+            <tbody className="divide-y divide-line-soft">
               {pairs.map((pair) => (
-                <tr key={pair.id} className="hover:bg-zinc-50">
+                <tr key={pair.id} className="transition-colors duration-150 hover:bg-ground-deep">
                   <td className="px-4 py-2">
                     <Link
                       href={`/koppels/${pair.id}`}
-                      className="font-medium text-emerald-800 hover:underline"
+                      className="font-medium text-moss-ink hover:underline"
                     >
                       {pair.male_bird ? formatBirdLabel(pair.male_bird) : "-"}
                     </Link>
                   </td>
-                  <td className="px-4 py-2 text-zinc-700">
+                  <td className="px-4 py-2 text-ink-soft">
                     {pair.female_bird ? formatBirdLabel(pair.female_bird) : "-"}
                   </td>
-                  <td className="px-4 py-2 text-zinc-600">{pair.started_at}</td>
-                  <td className="px-4 py-2 text-zinc-600">
+                  <td className="px-4 py-2 text-ink-soft">{pair.started_at}</td>
+                  <td className="px-4 py-2 text-ink-soft">
                     {pair.status === "active" ? "Actief" : "Beëindigd"}
                   </td>
                 </tr>

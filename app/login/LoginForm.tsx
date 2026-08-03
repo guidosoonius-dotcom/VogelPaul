@@ -64,8 +64,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-      <div className="mb-6 flex rounded-md bg-zinc-100 p-1 text-sm font-medium">
+    <div className="rounded-lg border border-line-soft bg-card p-6 shadow-sm">
+      <div className="mb-6 flex rounded-full border border-line-soft bg-ground-deep p-1 text-sm font-bold">
         <button
           type="button"
           onClick={() => {
@@ -74,10 +74,10 @@ export default function LoginForm() {
             setMagicLinkSent(false);
           }}
           className={clsx(
-            "flex-1 rounded-sm px-3 py-1.5 transition-colors",
+            "flex-1 rounded-full px-3 py-1.5 transition-colors duration-150",
             mode === "magic_link"
-              ? "bg-white text-zinc-900 shadow-sm"
-              : "text-zinc-500 hover:text-zinc-700",
+              ? "bg-moss text-card-raised"
+              : "text-ink-soft hover:text-ink",
           )}
         >
           Magische link
@@ -90,10 +90,10 @@ export default function LoginForm() {
             setMagicLinkSent(false);
           }}
           className={clsx(
-            "flex-1 rounded-sm px-3 py-1.5 transition-colors",
+            "flex-1 rounded-full px-3 py-1.5 transition-colors duration-150",
             mode === "password"
-              ? "bg-white text-zinc-900 shadow-sm"
-              : "text-zinc-500 hover:text-zinc-700",
+              ? "bg-moss text-card-raised"
+              : "text-ink-soft hover:text-ink",
           )}
         >
           Wachtwoord
@@ -102,8 +102,8 @@ export default function LoginForm() {
 
       {mode === "magic_link" ? (
         magicLinkSent ? (
-          <p className="text-sm text-zinc-700">
-            We hebben een inloglink gestuurd naar <strong>{email}</strong>.
+          <p className="text-sm text-ink-soft">
+            We hebben een inloglink gestuurd naar <strong className="text-ink">{email}</strong>.
             Open je e-mail en klik op de link om in te loggen.
           </p>
         ) : (
@@ -119,7 +119,7 @@ export default function LoginForm() {
                 placeholder="naam@voorbeeld.nl"
               />
             </FieldWrapper>
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {error && <p className="text-sm text-brick">{error}</p>}
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? "Bezig..." : "Stuur inloglink"}
             </Button>
@@ -148,7 +148,7 @@ export default function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FieldWrapper>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-brick">{error}</p>}
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? "Bezig..." : "Inloggen"}
           </Button>

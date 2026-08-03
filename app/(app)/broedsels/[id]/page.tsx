@@ -37,12 +37,12 @@ export default async function BroedselDetailPage({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-zinc-900">
+          <h1 className="text-2xl font-bold text-ink">
             Broedsel {brood.clutch_started_at ?? ""}
           </h1>
-          <p className="text-sm text-zinc-600">
+          <p className="text-sm text-ink-soft">
             Koppel:{" "}
-            <Link href={`/koppels/${brood.pair_id}`} className="text-emerald-800 hover:underline">
+            <Link href={`/koppels/${brood.pair_id}`} className="text-moss-ink hover:underline">
               {brood.pair?.male_bird ? formatBirdLabel(brood.pair.male_bird) : "?"} &times;{" "}
               {brood.pair?.female_bird ? formatBirdLabel(brood.pair.female_bird) : "?"}
             </Link>
@@ -61,35 +61,37 @@ export default async function BroedselDetailPage({
       </section>
 
       {brood.notes && (
-        <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Notities</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">{brood.notes}</p>
+        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
+          <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{brood.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-        <h2 className="text-sm font-medium text-zinc-800">
+      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Nakomelingen ({offspring.length})
         </h2>
         {offspring.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600">
+          <p className="mt-2 text-sm text-ink-soft">
             Nog geen nakomelingen als vogel geregistreerd.
           </p>
         ) : (
-          <ul className="mt-2 divide-y divide-zinc-100 text-sm">
+          <ul className="mt-2 divide-y divide-line-soft text-sm">
             {offspring.map((child) => (
-              <li key={child.id} className="flex justify-between py-2">
-                <Link href={`/vogels/${child.id}`} className="text-emerald-800 hover:underline">
+              <li key={child.id} className="flex justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
+                <Link href={`/vogels/${child.id}`} className="text-moss-ink hover:underline">
                   {formatBirdLabel(child)}
                 </Link>
-                <span className="text-zinc-500">{formatSex(child.sex)}</span>
+                <span className="text-ink-faint">{formatSex(child.sex)}</span>
               </li>
             ))}
           </ul>
         )}
 
-        <div className="mt-4 border-t border-zinc-100 pt-4">
-          <h3 className="text-sm font-medium text-zinc-800">Nakomeling toevoegen</h3>
+        <div className="mt-4 border-t border-line-soft pt-4">
+          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
+            Nakomeling toevoegen
+          </h3>
           <div className="mt-2">
             <RegisterOffspringForm species={species} action={registerOffspringForBrood} />
           </div>

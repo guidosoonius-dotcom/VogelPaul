@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FieldWrapper, Input, Select } from "@/components/ui/Field";
-import { computeCanaryRingColor } from "@/lib/domain/ringColor";
+import { computeCanaryRingColor, getRingColorSwatch } from "@/lib/domain/ringColor";
 import type { SpeciesOption } from "@/components/birds/BirdForm";
 
 export default function RegisterOffspringForm({
@@ -73,16 +73,25 @@ export default function RegisterOffspringForm({
               : undefined
           }
         >
-          <Input
-            id="offspring_ring_color"
-            name="ring_color"
-            value={effectiveColor}
-            onChange={(e) => {
-              setRingColor(e.target.value);
-              setOverridden(true);
-            }}
-            placeholder={suggestedColor ?? "bv. groen"}
-          />
+          <div className="relative">
+            {getRingColorSwatch(effectiveColor) && (
+              <span
+                className="absolute left-3 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full border border-black/15"
+                style={{ backgroundColor: getRingColorSwatch(effectiveColor)! }}
+              />
+            )}
+            <Input
+              id="offspring_ring_color"
+              name="ring_color"
+              value={effectiveColor}
+              onChange={(e) => {
+                setRingColor(e.target.value);
+                setOverridden(true);
+              }}
+              placeholder={suggestedColor ?? "bv. groen"}
+              className={getRingColorSwatch(effectiveColor) ? "pl-8" : undefined}
+            />
+          </div>
         </FieldWrapper>
         <FieldWrapper label="Verenigingscode" htmlFor="offspring_ring_federation_code">
           <Input id="offspring_ring_federation_code" name="ring_federation_code" />

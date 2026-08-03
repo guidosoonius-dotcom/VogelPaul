@@ -30,11 +30,11 @@ export default async function KoppelDetailPage({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-zinc-900">
+          <h1 className="text-2xl font-bold text-ink">
             {pair.male_bird ? formatBirdLabel(pair.male_bird) : "?"} &times;{" "}
             {pair.female_bird ? formatBirdLabel(pair.female_bird) : "?"}
           </h1>
-          <p className="text-sm text-zinc-600">
+          <p className="text-sm text-ink-soft">
             {pair.status === "active" ? "Actief" : "Beëindigd"} sinds {pair.started_at}
             {pair.ended_at ? ` (beëindigd op ${pair.ended_at})` : ""}
           </p>
@@ -54,29 +54,29 @@ export default async function KoppelDetailPage({
       </div>
 
       {pair.notes && (
-        <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Notities</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">{pair.notes}</p>
+        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
+          <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{pair.notes}</p>
         </section>
       )}
 
-      <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-        <h2 className="text-sm font-medium text-zinc-800">
+      <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">
           Broedsels ({broods.length})
         </h2>
         {broods.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600">Nog geen broedsels geregistreerd.</p>
+          <p className="mt-2 text-sm text-ink-soft">Nog geen broedsels geregistreerd.</p>
         ) : (
-          <ul className="mt-2 divide-y divide-zinc-100 text-sm">
+          <ul className="mt-2 divide-y divide-line-soft text-sm">
             {broods.map((brood) => (
-              <li key={brood.id} className="flex items-center justify-between py-2">
+              <li key={brood.id} className="flex items-center justify-between py-2 rounded-md px-2.5 -mx-2.5 transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:bg-ground-deep">
                 <Link
                   href={`/broedsels/${brood.id}`}
-                  className="text-emerald-800 hover:underline"
+                  className="text-moss-ink hover:underline"
                 >
                   {brood.clutch_started_at ?? "Datum onbekend"}
                 </Link>
-                <span className="text-zinc-500">
+                <span className="text-ink-faint">
                   {brood.eggs_laid} eieren &middot; {brood.eggs_hatched} uitgekomen &middot;{" "}
                   {brood.chicks_fledged} uitgevlogen
                 </span>

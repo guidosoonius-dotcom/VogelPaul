@@ -24,12 +24,12 @@ export default async function NieuwBroedselPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-zinc-900">Nieuw broedsel</h1>
-      <p className="mt-1 text-sm text-zinc-600">
+      <h1 className="text-2xl font-bold text-ink">Nieuw broedsel</h1>
+      <p className="mt-1 text-sm text-ink-soft">
         Koppel: {pair.male_bird ? formatBirdLabel(pair.male_bird) : "?"} &times;{" "}
         {pair.female_bird ? formatBirdLabel(pair.female_bird) : "?"}
       </p>
-      <div className="mt-6 max-w-2xl rounded-md border border-zinc-200 bg-white p-6">
+      <div className="mt-6 max-w-2xl rounded-lg border border-line-soft bg-card p-6">
         <BroodForm action={createBroodForPair} submitLabel="Broedsel toevoegen" />
       </div>
     </div>

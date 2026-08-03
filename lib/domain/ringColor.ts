@@ -52,3 +52,23 @@ export function computeCanaryRingColor(
     config,
   ) as CanaryRingColor;
 }
+
+const RING_COLOR_SWATCHES: Record<string, string> = {
+  groen: "var(--ring-groen)",
+  paars: "var(--ring-paars)",
+  bruin: "var(--ring-bruin)",
+  rood: "var(--ring-rood)",
+  blauw: "var(--ring-blauw)",
+  zwart: "var(--ring-zwart)",
+};
+
+/**
+ * Geeft een CSS-kleurwaarde voor een vrij ingevoerde ringkleurnaam, of
+ * `null` als de naam niet overeenkomt met een bekende cycluskleur (bv. bij
+ * een niet-kanarie-soort of een afwijkende handmatige invoer). Gebruikt om
+ * een kleurbolletje te tonen naast de tekstuele ringkleur.
+ */
+export function getRingColorSwatch(colorName: string | null | undefined): string | null {
+  if (!colorName) return null;
+  return RING_COLOR_SWATCHES[colorName.trim().toLowerCase()] ?? null;
+}

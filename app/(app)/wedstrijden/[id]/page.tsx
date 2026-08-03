@@ -30,8 +30,8 @@ export default async function WedstrijdresultaatDetailPage({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-zinc-900">{result.show_name}</h1>
-          <p className="text-sm text-zinc-600">
+          <h1 className="text-2xl font-bold text-ink">{result.show_name}</h1>
+          <p className="text-sm text-ink-soft">
             {result.show_date}
             {result.location ? ` · ${result.location}` : ""}
           </p>
@@ -42,15 +42,15 @@ export default async function WedstrijdresultaatDetailPage({
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <section className="rounded-md border border-zinc-200 bg-white p-4">
-          <dl className="space-y-1 text-sm text-zinc-700">
+        <section className="rounded-lg border border-line-soft bg-card p-4">
+          <dl className="space-y-1 text-sm text-ink-soft">
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Vogel</dt>
+              <dt className="text-ink-faint">Vogel</dt>
               <dd>
                 {result.bird ? (
                   <Link
                     href={`/vogels/${result.bird.id}`}
-                    className="text-emerald-800 hover:underline"
+                    className="text-moss-ink hover:underline"
                   >
                     {formatBirdLabel(result.bird)}
                   </Link>
@@ -60,22 +60,22 @@ export default async function WedstrijdresultaatDetailPage({
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Categorie/klasse</dt>
+              <dt className="text-ink-faint">Categorie/klasse</dt>
               <dd>{result.category ?? "-"}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Punten/score</dt>
+              <dt className="text-ink-faint">Punten/score</dt>
               <dd>{result.points ?? "-"}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-zinc-500">Klassering</dt>
+              <dt className="text-ink-faint">Klassering</dt>
               <dd>{result.ranking ?? "-"}</dd>
             </div>
           </dl>
         </section>
 
         {photoUrl && (
-          <section className="rounded-md border border-zinc-200 bg-white p-4">
+          <section className="rounded-lg border border-line-soft bg-card p-4">
             <Image
               src={photoUrl}
               alt={`Foto bij ${result.show_name}`}
@@ -89,9 +89,9 @@ export default async function WedstrijdresultaatDetailPage({
       </div>
 
       {result.notes && (
-        <section className="mt-6 rounded-md border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-800">Notities</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">{result.notes}</p>
+        <section className="mt-6 rounded-lg border border-line-soft bg-card p-4">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-faint">Notities</h2>
+          <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{result.notes}</p>
         </section>
       )}
 

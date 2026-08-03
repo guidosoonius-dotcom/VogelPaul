@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { clsx } from "@/lib/utils/clsx";
+import FeatherMark from "@/components/ui/FeatherMark";
 
 const LINKS = [
   { href: "/dashboard", label: "Dashboard" },
@@ -26,22 +27,26 @@ export default function NavBar({ email }: { email: string }) {
   }
 
   return (
-    <header className="border-b border-zinc-200 bg-white">
+    <header className="bg-moss text-card-raised">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <Link href="/dashboard" className="text-lg font-semibold text-emerald-800">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 font-display text-lg font-bold"
+          >
+            <FeatherMark />
             VogelPaul
           </Link>
-          <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+          <nav className="flex flex-wrap gap-x-1 gap-y-1 text-sm">
             {LINKS.slice(0, -1).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={clsx(
-                  "rounded-md px-2 py-1 transition-colors",
+                  "rounded-full px-3 py-1.5 font-bold transition-colors duration-150",
                   pathname?.startsWith(link.href)
-                    ? "bg-emerald-50 text-emerald-800 font-medium"
-                    : "text-zinc-600 hover:text-zinc-900",
+                    ? "bg-card-raised/15 text-card-raised"
+                    : "text-card-raised/80 hover:bg-card-raised/10 hover:text-card-raised",
                 )}
               >
                 {link.label}
@@ -49,19 +54,19 @@ export default function NavBar({ email }: { email: string }) {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-3 text-sm text-zinc-600">
+        <div className="flex items-center gap-3 text-sm text-card-raised/85">
           <Link
             href="/instellingen"
             className={clsx(
               "hidden sm:inline",
-              pathname?.startsWith("/instellingen") && "font-medium text-emerald-800",
+              pathname?.startsWith("/instellingen") && "font-bold text-card-raised",
             )}
           >
             {email}
           </Link>
           <button
             onClick={handleLogout}
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-zinc-700 hover:bg-zinc-50"
+            className="rounded-full border border-card-raised/45 px-3.5 py-1.5 text-xs font-bold transition-[background-color,transform] duration-150 hover:bg-card-raised/12 active:scale-95"
           >
             Uitloggen
           </button>
