@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getBirdById } from "@/lib/queries/birds";
 import { getSpeciesList } from "@/lib/queries/species";
 import { listBirdOptions } from "@/lib/queries/birds";
+import { getSignedPhotoUrl } from "@/lib/storage/photos";
 import BirdForm from "@/components/birds/BirdForm";
 import ConfirmDeleteForm from "@/components/ui/ConfirmDeleteForm";
 import { deleteBird, updateBird } from "../../actions";
@@ -21,9 +22,10 @@ export default async function VogelBewerkenPage({
   }
   if (!bird) notFound();
 
-  const [species, birdOptions] = await Promise.all([
+  const [species, birdOptions, currentPhotoUrl] = await Promise.all([
     getSpeciesList(),
     listBirdOptions(),
+    getSignedPhotoUrl("bird-photos", bird.photo_url),
   ]);
 
   const updateBirdWithId = updateBird.bind(null, id);
@@ -37,6 +39,7 @@ export default async function VogelBewerkenPage({
           species={species}
           birdOptions={birdOptions}
           initialData={{ ...bird }}
+          currentPhotoUrl={currentPhotoUrl}
           action={updateBirdWithId}
           submitLabel="Wijzigingen opslaan"
         />

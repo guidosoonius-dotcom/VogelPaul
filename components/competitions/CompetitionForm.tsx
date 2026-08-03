@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { FieldWrapper, Input, Select, Textarea } from "@/components/ui/Field";
 import { formatBirdLabel } from "@/lib/domain/birdLabel";
@@ -20,12 +21,14 @@ export interface CompetitionFormInitialData {
 export default function CompetitionForm({
   birds,
   initialData,
+  currentPhotoUrl,
   action,
   submitLabel = "Resultaat opslaan",
   fixedBirdId,
 }: {
   birds: BirdOption[];
   initialData?: CompetitionFormInitialData;
+  currentPhotoUrl?: string | null;
   action: (formData: FormData) => Promise<void>;
   submitLabel?: string;
   fixedBirdId?: string;
@@ -94,7 +97,21 @@ export default function CompetitionForm({
         </FieldWrapper>
       </div>
 
-      <FieldWrapper label="Foto (optioneel)" htmlFor="photo">
+      <FieldWrapper
+        label="Foto (optioneel)"
+        htmlFor="photo"
+        hint={currentPhotoUrl ? "Kies een nieuw bestand om de huidige foto te vervangen." : undefined}
+      >
+        {currentPhotoUrl && (
+          <Image
+            src={currentPhotoUrl}
+            alt=""
+            width={80}
+            height={80}
+            unoptimized
+            className="mb-2 h-20 w-20 rounded-md object-cover"
+          />
+        )}
         <Input id="photo" name="photo" type="file" accept="image/*" />
       </FieldWrapper>
 

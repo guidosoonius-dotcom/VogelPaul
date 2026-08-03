@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FieldWrapper, Input, Select, Textarea } from "@/components/ui/Field";
@@ -62,12 +63,14 @@ export default function BirdForm({
   species,
   birdOptions,
   initialData,
+  currentPhotoUrl,
   action,
   submitLabel = "Vogel opslaan",
 }: {
   species: SpeciesOption[];
   birdOptions: BirdOption[];
   initialData?: BirdFormInitialData;
+  currentPhotoUrl?: string | null;
   action: (formData: FormData) => Promise<void>;
   submitLabel?: string;
 }) {
@@ -218,11 +221,12 @@ export default function BirdForm({
           value={overridden ? "on" : ""}
         />
         {suggestedColor && (
-          <label className="mt-2 flex items-center gap-2 text-xs text-ink-soft">
+          <label className="mt-2 flex cursor-pointer items-center gap-2 py-1 text-xs text-ink-soft">
             <input
               type="checkbox"
               checked={overridden}
               onChange={(e) => setOverridden(e.target.checked)}
+              className="h-4 w-4 cursor-pointer accent-moss"
             />
             Kleur handmatig aangepast (wijkt af van de automatische suggestie)
           </label>
@@ -257,7 +261,21 @@ export default function BirdForm({
         </div>
       </fieldset>
 
-      <FieldWrapper label="Foto (optioneel)" htmlFor="photo">
+      <FieldWrapper
+        label="Foto (optioneel)"
+        htmlFor="photo"
+        hint={currentPhotoUrl ? "Kies een nieuw bestand om de huidige foto te vervangen." : undefined}
+      >
+        {currentPhotoUrl && (
+          <Image
+            src={currentPhotoUrl}
+            alt=""
+            width={56}
+            height={56}
+            unoptimized
+            className="mb-2 h-14 w-14 rounded-full object-cover"
+          />
+        )}
         <Input id="photo" name="photo" type="file" accept="image/*" />
       </FieldWrapper>
 

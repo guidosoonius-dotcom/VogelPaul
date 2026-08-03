@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getCompetitionResultById } from "@/lib/queries/competitions";
 import { listBirdOptions } from "@/lib/queries/birds";
+import { getSignedPhotoUrl } from "@/lib/storage/photos";
 import CompetitionForm from "@/components/competitions/CompetitionForm";
 import { updateCompetitionResult } from "../../actions";
 
@@ -19,7 +20,10 @@ export default async function WedstrijdresultaatBewerkenPage({
   }
   if (!result) notFound();
 
-  const birds = await listBirdOptions();
+  const [birds, currentPhotoUrl] = await Promise.all([
+    listBirdOptions(),
+    getSignedPhotoUrl("competition-photos", result.photo_url),
+  ]);
   const updateResultWithId = updateCompetitionResult.bind(null, id);
 
   return (
@@ -29,6 +33,7 @@ export default async function WedstrijdresultaatBewerkenPage({
         <CompetitionForm
           birds={birds}
           initialData={result}
+          currentPhotoUrl={currentPhotoUrl}
           action={updateResultWithId}
           submitLabel="Wijzigingen opslaan"
         />
